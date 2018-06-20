@@ -5,6 +5,6 @@
 
 	public interface IUrlScraper
 	{
-		List<string> ScrapeUrls(string webPageContent);
+		List<string> ScrapeUrls(string url);
 	}
 }

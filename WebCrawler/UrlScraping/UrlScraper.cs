@@ -9,15 +9,18 @@
 	{
 		private readonly IUrlFilter[] _urlFilters;
 		private readonly UrlExtractor _urlExtractor;
+		private readonly IWebPageLoader _webPageLoader;
 
-		public UrlScraper(IUrlFilter[] urlFilters, UrlExtractor urlExtractor)
+		public UrlScraper(IUrlFilter[] urlFilters, UrlExtractor urlExtractor, IWebPageLoader webPageLoader)
 		{
 			_urlFilters = urlFilters;
 			_urlExtractor = urlExtractor;
+			_webPageLoader = webPageLoader;
 		}
 
-		public List<string> ScrapeUrls(string webPageContent)
+		public List<string> ScrapeUrls(string url)
 		{
+			var webPageContent = _webPageLoader.Load(url);
 			var urls = _urlExtractor.ExtractUrlsFromPage(webPageContent);
 			urls = FilterUrls(urls);
 			return urls;

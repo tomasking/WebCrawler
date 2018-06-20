@@ -5,6 +5,8 @@ namespace WebCrawler.Tests.UnitTests
 	using HttpClient;
 	using Shouldly;
 	using UrlScraping;
+	using WebCrawler.UrlScraping;
+	using WebCrawler.UrlScraping.Filters;
 	using Xunit;
 
 	public class CrawlerTests
@@ -13,8 +15,9 @@ namespace WebCrawler.Tests.UnitTests
         public void CanCrawlTheFrontPage()
         {
 	        IWebPageLoader webPageLoader = new FakeWebPageLoader();
-	        IUrlScraper urlScraper = new UrlScraper(null);
-			ICrawlingStrategy crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader, urlScraper);
+			IUrlFilter[] filters = new IUrlFilter[]{ new SameDomainUrlFilter("www.something.com") };
+	        IUrlScraper urlScraper = new UrlScraper(filters, new UrlExtractor(), webPageLoader);
+			ICrawlingStrategy crawlingStrategy = new BreadthFirstSearchStrategy(urlScraper);
 			CrawlerService crawlerService = new CrawlerService(crawlingStrategy);
 
 	        string[] urls = crawlerService.Crawl("www.something.com");
@@ -28,7 +31,11 @@ namespace WebCrawler.Tests.UnitTests
 	public class FakeWebPageLoader : IWebPageLoader {
 		public string Load(string url)
 		{
-			return File.ReadAllTextAsync("Pages/home.html").Result;
+			if (url == "www.something.com") { 
+				return File.ReadAllTextAsync("TestData/home.html").Result;
+			}
+
+			return " ";
 		}
 	}
 }

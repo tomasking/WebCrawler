@@ -11,11 +11,11 @@ namespace WebCrawler
         static void Main(string[] args)
         {
 	        IWebPageLoader webPageLoader = new WebPageLoader();
-	        IUrlScraper urlScraper = new UrlScraper();
-			var crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader,urlScraper);
-			var crawlerService = new CrawlerService(crawlingStrategy);
+	        //IUrlScraper urlScraper = new UrlScraper();
+			////var crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader,urlScraper);
+			//var crawlerService = new CrawlerService(crawlingStrategy);
 
-	        crawlerService.Crawl("http://www.monzo.com");
+	       // crawlerService.Crawl("http://www.monzo.com");
 		
 	        Console.WriteLine("Press any key to exit");
 			Console.ReadKey();
