@@ -16,7 +16,7 @@ namespace WebCrawler.Tests
 			ICrawlingStrategy crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader, urlScraper);
 			CrawlerService crawlerService = new CrawlerService(crawlingStrategy);
 
-	        string[] urls = crawlerService.Crawl("www.monzo.com");
+	        string[] urls = crawlerService.Crawl("www.something.com");
 
 			urls.ShouldNotBeNull();
 			urls.Length.ShouldBeGreaterThan(0);

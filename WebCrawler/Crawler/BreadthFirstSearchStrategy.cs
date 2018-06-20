@@ -19,7 +19,7 @@ namespace WebCrawler
 			var webPageContent = _webPageLoader.Load(seedUrl);
 			var urls = _urlScraper.ScrapeUrls(webPageContent);
 
-			return urls;
+			return urls.ToArray();
 		}
 	}
 }

@@ -1,15 +1,29 @@
 ﻿namespace WebCrawler.HttpClient
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Text.RegularExpressions;
+
 	public interface IUrlScraper
 	{
-		string[] ScrapeUrls(string webPageContent);
+		List<string> ScrapeUrls(string webPageContent);
 	}
 
 	public class UrlScraper : IUrlScraper
 	{
-		public string[] ScrapeUrls(string webPageContent)
+		public List<string> ScrapeUrls(string webPageContent)
 		{
-			return null;
+			var urls = new List<string>();
+			
+			MatchCollection m1 = Regex.Matches(webPageContent, @"<a\s+(?:[^>]*?\s+)?href=([""'])(.*?)\1", RegexOptions.Singleline);
+			foreach (Match m in m1)
+			{
+				string value = m.Groups[2].Value;
+				urls.Add(value);
+				
+			}
+
+			return urls;
 		}
 	}
 }
