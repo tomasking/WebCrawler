@@ -1,8 +1,7 @@
-﻿using System;
-using WebCrawler.HttpClient;
-
-namespace WebCrawler
+﻿namespace WebCrawler.Crawler
 {
+	using HttpClient;
+
 	public class BreadthFirstSearchStrategy : ICrawlingStrategy
 	{
 		private readonly IWebPageLoader _webPageLoader;

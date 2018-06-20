@@ -1,5 +1,7 @@
 ﻿namespace WebCrawler
 {
+	using Crawler;
+
 	public class CrawlerService
 	{
 		private readonly ICrawlingStrategy _crawlingStrategy;

@@ -7,6 +7,7 @@ namespace WebCrawler.Tests
 	using System.IO;
 	using HttpClient;
 	using Shouldly;
+	using UrlScraping;
 	using Xunit;
 
 	public class UrlScraperTests
@@ -14,7 +15,7 @@ namespace WebCrawler.Tests
 		[Fact]
 	    public void GetsUrlFromString()
 	    {
-		    UrlScraper urlScraper = new UrlScraper();
+		    UrlScraper urlScraper = new UrlScraper(null);
 
 		    var content= File.ReadAllTextAsync("Pages/home.html").Result;
 			//string content = "<th><a href=\"Boot_53.html\">135 Boot</a></th>";

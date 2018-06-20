@@ -1,4 +1,4 @@
-﻿namespace WebCrawler
+﻿namespace WebCrawler.Crawler
 {
 	public interface ICrawlingStrategy
 	{

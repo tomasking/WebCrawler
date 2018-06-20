@@ -3,7 +3,10 @@ using WebCrawler.HttpClient;
 
 namespace WebCrawler
 {
-    class Program
+	using Crawler;
+	using UrlScraping;
+
+	class Program
     {
         static void Main(string[] args)
         {

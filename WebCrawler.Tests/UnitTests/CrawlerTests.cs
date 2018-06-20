@@ -1,18 +1,19 @@
-using System;
-using System.IO;
-using Shouldly;
-using WebCrawler.HttpClient;
-using Xunit;
-
-namespace WebCrawler.Tests
+namespace WebCrawler.Tests.UnitTests
 {
-    public class CrawlerTests
+	using System.IO;
+	using Crawler;
+	using HttpClient;
+	using Shouldly;
+	using UrlScraping;
+	using Xunit;
+
+	public class CrawlerTests
     {
         [Fact]
         public void CanCrawlTheFrontPage()
         {
 	        IWebPageLoader webPageLoader = new FakeWebPageLoader();
-	        IUrlScraper urlScraper = new UrlScraper();
+	        IUrlScraper urlScraper = new UrlScraper(null);
 			ICrawlingStrategy crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader, urlScraper);
 			CrawlerService crawlerService = new CrawlerService(crawlingStrategy);
 
