@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace WebCrawler.UrlScraping
+﻿namespace WebCrawler.Crawler.UrlScraping.Extracting
 {
+	using System.Collections.Generic;
 	using System.Text.RegularExpressions;
 
 	public class UrlExtractor

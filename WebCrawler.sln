@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler", "WebCrawler\WebCrawler.csproj", "{4B644E21-6A2E-4A2D-8157-94E89E84A69F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawler", "WebCrawler\WebCrawler.csproj", "{4B644E21-6A2E-4A2D-8157-94E89E84A69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler.Tests", "WebCrawler.Tests\WebCrawler.Tests.csproj", "{FB1AD25D-C5F9-4269-8204-31D4DC634555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCrawler.Tests", "WebCrawler.Tests\WebCrawler.Tests.csproj", "{FB1AD25D-C5F9-4269-8204-31D4DC634555}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

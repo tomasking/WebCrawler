@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebCrawler.Tests.UnitTests.UrlScraping.Filters
 {
-    public class SameDomainUrlFilterTests
+    public class ExternalDomainFilterTests
     {
 
     }

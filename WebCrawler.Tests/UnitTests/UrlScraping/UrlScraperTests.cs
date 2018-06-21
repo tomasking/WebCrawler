@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebCrawler.Tests
+﻿namespace WebCrawler.Tests.UnitTests.UrlScraping
 {
-	using System.IO;
-	using HttpClient;
-	using Shouldly;
-	using UrlScraping;
 	using Xunit;
 
 	public class UrlScraperTests

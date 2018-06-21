@@ -1,24 +1,40 @@
 ﻿using System;
-using WebCrawler.HttpClient;
 
 namespace WebCrawler
 {
+	using System.Threading.Tasks;
+	using Autofac;
 	using Crawler;
-	using UrlScraping;
+	using Infrastructure;
 
 	class Program
     {
-        static void Main(string[] args)
-        {
-	        IWebPageLoader webPageLoader = new WebPageLoader();
-	        //IUrlScraper urlScraper = new UrlScraper();
-			////var crawlingStrategy = new BreadthFirstSearchStrategy(webPageLoader,urlScraper);
-			//var crawlerService = new CrawlerService(crawlingStrategy);
+	    static void Main()
+	    {
+		    RunAsync().GetAwaiter().GetResult();
+	    }
 
-	       // crawlerService.Crawl("http://www.monzo.com");
+	    static async Task RunAsync()
+	    {
+		    var builder = BuildIoC();
+
+		    using (var scope = builder.BeginLifetimeScope())
+		    {
+			    var crawlerService = scope.Resolve<CrawlingOrchestrator>();
+			    var siteMap = await crawlerService.Crawl("http://www.smoething.com");
+
+			    Console.WriteLine(siteMap);
+		    }
+
+		    Console.WriteLine("Press any key to exit");
+		    Console.ReadKey();
+		}
 		
-	        Console.WriteLine("Press any key to exit");
-			Console.ReadKey();
-        }
-    }
+	    private static IContainer BuildIoC()
+	    {
+		    var builder = new ContainerBuilder();
+			builder.RegisterModule<CrawlerModule>();
+			return builder.Build();
+	    }
+	}
 }
