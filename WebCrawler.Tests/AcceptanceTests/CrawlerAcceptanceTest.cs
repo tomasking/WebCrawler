@@ -11,7 +11,7 @@ namespace WebCrawler.Tests.AcceptanceTests
 	using Shouldly;
 	using Xunit;
 
-	public class CrawlerTests : IDisposable
+	public class CrawlerAcceptanceTest : IDisposable
     {
 	    private readonly IContainer _container;
 	    private readonly CrawlingOrchestrator _crawlingOrchestrator;
@@ -41,7 +41,7 @@ namespace WebCrawler.Tests.AcceptanceTests
   /privacy
   /cookies
 ";
-		public CrawlerTests()
+		public CrawlerAcceptanceTest()
 	    {
 		    _container = BuildIoCContainer();
 			_crawlingOrchestrator = _container.Resolve<CrawlingOrchestrator>();
@@ -53,7 +53,7 @@ namespace WebCrawler.Tests.AcceptanceTests
 	        Stopwatch sw = new Stopwatch();
 	        sw.Start();
 
-			var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl);
+			var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl, 6);
 
 			sw.Stop();
 	        Debug.WriteLine(sw.ElapsedMilliseconds);

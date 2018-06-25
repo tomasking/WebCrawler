@@ -16,13 +16,17 @@ namespace WebCrawler.HttpClient
 			    if (response.IsSuccessStatusCode)
 			    {
 				    return await response.Content.ReadAsStringAsync();
-			    }
+				}
+
+			    // TODO: replace with logging framework
+			    Console.WriteLine($"Error loading {url}, status code {response.StatusCode}");
+
 		    }
 		    catch (Exception e)
 		    {
 				// TODO: replace with logging framework
-				Console.WriteLine("ERROR: " + e);
-		    }
+			    Console.WriteLine($"Error loading {url}, error {e}");
+			}
 
 		    return string.Empty;
 	    }

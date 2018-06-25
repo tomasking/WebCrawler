@@ -1,4 +1,6 @@
-﻿namespace WebCrawler.Crawler.UrlScraping.Filters
+﻿using System.Linq;
+
+namespace WebCrawler.Crawler.UrlScraping.Filters
 {
 	using System.Collections.Generic;
 
@@ -7,13 +9,19 @@
 	/// </summary>
     public class RobotsFileExcludedPagesFilter : IUrlFilter
     {
+	    readonly List<string> _excludedUrls = new List<string>()
+		{
+			"/docs/", // from robots.txt
+			"/cdn-cgi/",
+			"/static/"
+		};
 	    public List<string> Filter(string domain, List<string> urls)
 	    {
 			var filteredUrls = new List<string>();
 		    foreach (var url in urls)
 		    {
-			    if (!url.ToLower().StartsWith("/docs/"))
-			    {
+				if (!_excludedUrls.Any(u => url.StartsWith(u)))
+				{ 
 				    filteredUrls.Add(url);
 			    }
 		    }

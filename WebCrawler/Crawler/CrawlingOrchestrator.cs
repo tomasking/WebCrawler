@@ -14,10 +14,10 @@
 			_siteMapPrinter = siteMapPrinter;
 		}
 
-		public async Task<string> Crawl(string seedUrl)
+		public async Task<string> Crawl(string seedUrl, int numberOfThreads = 1)
 		{
-			var siteMap = await _crawlingStrategy.Crawl(seedUrl);
-
+			var siteMap = await _crawlingStrategy.Crawl(seedUrl, numberOfThreads);
+			
 			var visualSiteMap = _siteMapPrinter.Format(siteMap);
 
 			return visualSiteMap;

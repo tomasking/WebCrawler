@@ -1,24 +1,31 @@
-﻿namespace WebCrawler.Crawler
+﻿using System.Linq;
+
+namespace WebCrawler.Crawler
 {
 	using System.Text;
 	using Strategies;
 
 	public class SiteMapPrinter
 	{
-		public string Format(PageNode siteMap)
+		public string Format(PageNode rootNode)
 		{
 			StringBuilder builder = new StringBuilder();
-			builder.AppendLine(siteMap.Url);
-			foreach (var childNode in siteMap.ChildNodes)
-			{
-				builder.AppendLine("  " + childNode.Url);
-				foreach (var childNodeChildNode in childNode.ChildNodes)
-				{
-					builder.AppendLine("    " + childNodeChildNode.Url);
-				}
-			}
+			builder.AppendLine(rootNode.Url);
+			Iterate(rootNode, builder, 1);
 
 			return builder.ToString();
+		}
+
+		private static void Iterate(PageNode rootNode, StringBuilder builder, int depth)
+		{
+			foreach (var childNode in rootNode.ChildNodes)
+			{
+				builder.AppendLine(" ".PadLeft(depth * 2) + childNode.Url);
+				if (childNode.ChildNodes.Any())
+				{
+					Iterate(childNode, builder, depth+1);
+				}
+			}
 		}
 	}
 }

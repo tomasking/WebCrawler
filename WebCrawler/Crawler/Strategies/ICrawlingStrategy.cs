@@ -4,6 +4,6 @@
 
 	public interface ICrawlingStrategy
 	{
-		Task<PageNode> Crawl(string rootDomain);
+		Task<PageNode> Crawl(string rootDomain, int numberOfThreads);
 	}
 }
