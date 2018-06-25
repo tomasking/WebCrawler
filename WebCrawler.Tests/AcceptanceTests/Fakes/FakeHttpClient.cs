@@ -3,6 +3,7 @@ namespace WebCrawler.Tests.AcceptanceTests.Fakes
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Threading;
 	using System.Threading.Tasks;
 	using HttpClient;
 
@@ -18,9 +19,10 @@ namespace WebCrawler.Tests.AcceptanceTests.Fakes
 
 		public async Task<string> Get(string url)
 		{
+			Thread.Sleep(100);
 			if (_pages.TryGetValue(url, out string filename))
 			{
-				return await File.ReadAllTextAsync($"TestData/{filename}");
+				return await File.ReadAllTextAsync($"AcceptanceTests/Fakes/TestData/{filename}");
 			}
 
 			return String.Empty;

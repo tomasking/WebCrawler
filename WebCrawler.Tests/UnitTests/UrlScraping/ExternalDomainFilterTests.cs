@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebCrawler.Tests.UnitTests.UrlScraping.Filters
+﻿namespace WebCrawler.Tests.UnitTests.UrlScraping
 {
-    public class ExternalDomainFilterTests
+	public class ExternalDomainFilterTests
     {
 
     }

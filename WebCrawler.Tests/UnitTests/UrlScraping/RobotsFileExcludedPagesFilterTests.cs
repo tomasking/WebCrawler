@@ -1,4 +1,4 @@
-﻿namespace WebCrawler.Tests.UnitTests.UrlScraping.Filters
+﻿namespace WebCrawler.Tests.UnitTests.UrlScraping
 {
 	public class RobotsFileExcludedPagesFilterTests
 	{

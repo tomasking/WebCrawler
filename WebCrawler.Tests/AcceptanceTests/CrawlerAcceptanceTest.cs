@@ -1,6 +1,7 @@
 namespace WebCrawler.Tests.AcceptanceTests
 {
 	using System;
+	using System.Diagnostics;
 	using System.Threading.Tasks;
 	using Autofac;
 	using Crawler;
@@ -49,9 +50,15 @@ namespace WebCrawler.Tests.AcceptanceTests
         [Fact]
         public async Task ShouldDisplayTheSiteMapWhenICrawlThisWebsite()
         {
-	        var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl);
-				        
-	        siteMap.ShouldBe(_expectedSiteMap);
+	        Stopwatch sw = new Stopwatch();
+	        sw.Start();
+
+			var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl);
+
+			sw.Stop();
+	        Debug.WriteLine(sw.ElapsedMilliseconds);
+
+			siteMap.ShouldBe(_expectedSiteMap);
         }
 
 	    private IContainer BuildIoCContainer()
