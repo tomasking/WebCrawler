@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using Autofac;
+using WebCrawler.Crawler;
+using WebCrawler.Infrastructure;
 
 namespace WebCrawler
 {
-	using System.Threading.Tasks;
-	using Autofac;
-	using Crawler;
-	using Infrastructure;
-
 	class Program
     {
 	    static void Main()
@@ -28,13 +27,13 @@ namespace WebCrawler
 				Stopwatch sw = new Stopwatch();
 			    sw.Start();
 
-				var visualSiteMap = await crawler.Crawl("http://www.monzo.com", numberOfThreads: 4);
+				var siteMap = await crawler.Crawl("monzo.com", numberOfThreads: 4);
 			    sw.Stop();
 
-				Console.WriteLine(visualSiteMap);
+				Console.WriteLine(siteMap);
 			    Console.WriteLine($"Time taken {sw.Elapsed.TotalSeconds} seconds");
 
-				await File.WriteAllTextAsync("./monzo_sitemap.txt", visualSiteMap, Encoding.UTF8);
+				await File.WriteAllTextAsync("./monzo_sitemap.txt", siteMap, Encoding.UTF8);
 		    }
 
 		    Console.WriteLine("Press any key to exit");

@@ -9,7 +9,7 @@ namespace WebCrawler.Tests.AcceptanceTests.Fakes
 
 	public class FakeHttpClient : IHttpClientWrapper
 	{
-		private const string SeedUrl = "www.somedomain.com";
+		private const string SeedUrl = "monzo.com";
 
 		readonly Dictionary<string, string> _pages = new Dictionary<string, string>()
 		{

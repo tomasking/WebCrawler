@@ -1,7 +1,7 @@
-﻿namespace WebCrawler.Crawler.Strategies
-{
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace WebCrawler.Crawler.Model
+{
 	public class PageNode
 	{
 		public List<PageNode> ChildNodes { get; }

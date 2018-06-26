@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Shouldly;
 using WebCrawler.Crawler;
-using WebCrawler.Crawler.Strategies;
+using WebCrawler.Crawler.Model;
 using Xunit;
 
 namespace WebCrawler.Tests.UnitTests
@@ -14,21 +14,19 @@ namespace WebCrawler.Tests.UnitTests
 		[Fact]
 	    public void ShouldBeAbleToPrintVisualSiteMap()
 	    {
-			SiteMapPrinter printer = new SiteMapPrinter();
+			var printer = new SiteMapPrinter();
 
 			PageNode root = new PageNode("/");
 			PageNode about = new PageNode("/about/");
 			root.AddChild(about);
 		    PageNode blog = new PageNode("/blog/");
 		    root.AddChild(blog);
-
-		    PageNode blogOne = new PageNode("/blog/one/");
+			PageNode blogOne = new PageNode("/blog/one/");
 			blog.AddChild(blogOne);
-
-		    PageNode blogOneB = new PageNode("/blog/one/b/");
+			PageNode blogOneB = new PageNode("/blog/one/b/");
 		    blogOne.AddChild(blogOneB);
 
-			var visualSiteMap = printer.Format(root);
+			var siteMap = printer.Format(root);
 
 		    string _expectedSiteMap = @"/
   /about/   
@@ -36,7 +34,7 @@ namespace WebCrawler.Tests.UnitTests
     /blog/one/
       /blog/one/b/";
 
-			visualSiteMap.ShouldBe(_expectedSiteMap);
+			siteMap.ShouldBe(_expectedSiteMap);
 		}
 
     }

@@ -1,38 +1,31 @@
-﻿namespace WebCrawler.Crawler.UrlScraping
-{
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using Extracting;
-	using Filters;
-	using HttpClient;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebCrawler.HttpClient;
 
+namespace WebCrawler.Crawler.UrlScraping
+{
 	public class UrlScraper
 	{
-		private readonly IUrlFilter[] _urlFilters;
+		private readonly UrlFilter _urlFilter;
 		private readonly UrlExtractor _urlExtractor;
 		private readonly IHttpClientWrapper _httpClientWrapper;
 
-		public UrlScraper(IUrlFilter[] urlFilters, UrlExtractor urlExtractor, IHttpClientWrapper httpClientWrapper)
+		public UrlScraper(UrlFilter urlFilter, UrlExtractor urlExtractor, IHttpClientWrapper httpClientWrapper)
 		{
-			_urlFilters = urlFilters;
+			_urlFilter = urlFilter;
 			_urlExtractor = urlExtractor;
 			_httpClientWrapper = httpClientWrapper;
 		}
 
 		public async Task<List<string>> ScrapeUrls(string domain, string url)
 		{
-			var webPageContent = await _httpClientWrapper.Get(domain + url);
-			var urls = _urlExtractor.ExtractUrlsFromPage(webPageContent);
-			urls = FilterUrls(domain, urls);
-			return urls;
-		}
+			var fullUrl = $"https://{domain}{url}";
+			var webPageContent = await _httpClientWrapper.Get(fullUrl);
 
-		private List<string> FilterUrls(string domain, List<string> urls)
-		{
-			foreach (var urlFilter in _urlFilters)
-			{
-				urls = urlFilter.Filter(domain,urls);
-			}
+			var urls = _urlExtractor.ExtractUrlsFromPage(webPageContent);
+
+			urls = _urlFilter.Filter(domain, urls);
+
 			return urls;
 		}
 	}

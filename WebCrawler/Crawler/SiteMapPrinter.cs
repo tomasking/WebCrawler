@@ -1,9 +1,9 @@
 ﻿using System.Linq;
+using WebCrawler.Crawler.Model;
 
 namespace WebCrawler.Crawler
 {
 	using System.Text;
-	using Strategies;
 
 	public class SiteMapPrinter
 	{

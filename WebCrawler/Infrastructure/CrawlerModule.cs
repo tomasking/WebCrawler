@@ -2,10 +2,7 @@
 {
 	using Autofac;
 	using Crawler;
-	using Crawler.Strategies;
 	using Crawler.UrlScraping;
-	using Crawler.UrlScraping.Extracting;
-	using Crawler.UrlScraping.Filters;
 	using HttpClient;
 
 	public class CrawlerModule : Module
@@ -14,10 +11,9 @@
 		{
 			builder.RegisterType<HttpClientWrapper>().As<IHttpClientWrapper>().SingleInstance();
 			builder.RegisterType<UrlScraper>().SingleInstance();
-			builder.RegisterType<BreadthFirstSearchStrategy>().As<ICrawlingStrategy>().SingleInstance();
+			builder.RegisterType<Crawler>().SingleInstance();
 			builder.RegisterType<UrlExtractor>().SingleInstance();
-			builder.RegisterType<ExternalDomainFilter>().As<IUrlFilter>().SingleInstance();
-			builder.RegisterType<ExcludedPagesFilter>().As<IUrlFilter>().SingleInstance();
+			builder.RegisterType<UrlFilter>().SingleInstance();
 			builder.RegisterType<SiteMapPrinter>().SingleInstance();
 			builder.RegisterType<CrawlingOrchestrator>().SingleInstance();
 		}

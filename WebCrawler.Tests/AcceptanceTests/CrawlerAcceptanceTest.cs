@@ -1,21 +1,20 @@
+using System;
+using System.Threading.Tasks;
+using Autofac;
+using Shouldly;
+using WebCrawler.Crawler;
+using WebCrawler.HttpClient;
+using WebCrawler.Infrastructure;
+using WebCrawler.Tests.AcceptanceTests.Fakes;
+using Xunit;
+
 namespace WebCrawler.Tests.AcceptanceTests
 {
-	using System;
-	using System.Diagnostics;
-	using System.Threading.Tasks;
-	using Autofac;
-	using Crawler;
-	using Fakes;
-	using HttpClient;
-	using Infrastructure;
-	using Shouldly;
-	using Xunit;
-
 	public class CrawlerAcceptanceTest : IDisposable
     {
 	    private readonly IContainer _container;
 	    private readonly CrawlingOrchestrator _crawlingOrchestrator;
-	    private string _seedUrl = "www.somedomain.com";
+	    private string _seedUrl = "monzo.com";
 	    string _expectedSiteMap =
 		    @"/
   /about
@@ -50,9 +49,7 @@ namespace WebCrawler.Tests.AcceptanceTests
         [Fact]
         public async Task ShouldDisplayTheSiteMapWhenICrawlThisWebsite()
         {
-	        
-			var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl, 6);
-
+	        var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl, 1);
 			
 			siteMap.ShouldBe(_expectedSiteMap);
         }

@@ -1,26 +1,26 @@
-﻿namespace WebCrawler.Crawler
-{
-	using System.Threading.Tasks;
-	using Strategies;
+﻿using System.Threading.Tasks;
+using WebCrawler.Crawler.Model;
 
+namespace WebCrawler.Crawler
+{
 	public class CrawlingOrchestrator
 	{
-		private readonly ICrawlingStrategy _crawlingStrategy;
+		private readonly Crawler _crawler;
 		private readonly SiteMapPrinter _siteMapPrinter;
 
-		public CrawlingOrchestrator(ICrawlingStrategy crawlingStrategy, SiteMapPrinter siteMapPrinter)
+		public CrawlingOrchestrator(Crawler crawler, SiteMapPrinter siteMapPrinter)
 		{
-			_crawlingStrategy = crawlingStrategy;
+			_crawler = crawler;
 			_siteMapPrinter = siteMapPrinter;
 		}
 
 		public async Task<string> Crawl(string seedUrl, int numberOfThreads = 1)
 		{
-			var siteMap = await _crawlingStrategy.Crawl(seedUrl, numberOfThreads);
+			PageNode rootNode = await _crawler.Start(seedUrl, numberOfThreads);
 			
-			var visualSiteMap = _siteMapPrinter.Format(siteMap);
+			string siteMap = _siteMapPrinter.Format(rootNode);
 
-			return visualSiteMap;
+			return siteMap;
 		}
 	}
 }
