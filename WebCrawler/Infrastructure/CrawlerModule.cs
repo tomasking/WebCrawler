@@ -17,7 +17,7 @@
 			builder.RegisterType<BreadthFirstSearchStrategy>().As<ICrawlingStrategy>().SingleInstance();
 			builder.RegisterType<UrlExtractor>().SingleInstance();
 			builder.RegisterType<ExternalDomainFilter>().As<IUrlFilter>().SingleInstance();
-			builder.RegisterType<RobotsFileExcludedPagesFilter>().As<IUrlFilter>().SingleInstance();
+			builder.RegisterType<ExcludedPagesFilter>().As<IUrlFilter>().SingleInstance();
 			builder.RegisterType<SiteMapPrinter>().SingleInstance();
 			builder.RegisterType<CrawlingOrchestrator>().SingleInstance();
 		}

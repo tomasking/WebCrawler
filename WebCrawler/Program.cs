@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -23,10 +24,17 @@ namespace WebCrawler
 		    using (var scope = builder.BeginLifetimeScope())
 		    {
 			    var crawler = scope.Resolve<CrawlingOrchestrator>();
-			    var visualSiteMap = await crawler.Crawl("http://www.monzo.com", numberOfThreads: 4);
 
-			    Console.WriteLine(visualSiteMap);
-			    await File.WriteAllTextAsync("./monzo_sitemap.txt", visualSiteMap, Encoding.UTF8);
+				Stopwatch sw = new Stopwatch();
+			    sw.Start();
+
+				var visualSiteMap = await crawler.Crawl("http://www.monzo.com", numberOfThreads: 4);
+			    sw.Stop();
+
+				Console.WriteLine(visualSiteMap);
+			    Console.WriteLine($"Time taken {sw.Elapsed.TotalSeconds} seconds");
+
+				await File.WriteAllTextAsync("./monzo_sitemap.txt", visualSiteMap, Encoding.UTF8);
 		    }
 
 		    Console.WriteLine("Press any key to exit");

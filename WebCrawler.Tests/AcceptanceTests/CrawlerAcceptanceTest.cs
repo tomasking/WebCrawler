@@ -50,14 +50,10 @@ namespace WebCrawler.Tests.AcceptanceTests
         [Fact]
         public async Task ShouldDisplayTheSiteMapWhenICrawlThisWebsite()
         {
-	        Stopwatch sw = new Stopwatch();
-	        sw.Start();
-
+	        
 			var siteMap = await _crawlingOrchestrator.Crawl(_seedUrl, 6);
 
-			sw.Stop();
-	        Debug.WriteLine(sw.ElapsedMilliseconds);
-
+			
 			siteMap.ShouldBe(_expectedSiteMap);
         }
 
