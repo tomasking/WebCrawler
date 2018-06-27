@@ -37,7 +37,7 @@ namespace WebCrawler
 				Stopwatch sw = new Stopwatch();
 			    sw.Start();
 
-				var siteMap = await crawler.Crawl("monzo.com", numberOfThreads: 4);
+				var siteMap = await crawler.Crawl("monzo.com", numberOfThreads: 10);
 
 			    sw.Stop();
 				Console.WriteLine(siteMap);

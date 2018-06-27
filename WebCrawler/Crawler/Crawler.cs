@@ -28,6 +28,7 @@ namespace WebCrawler.Crawler
 
 			var rootNode = new PageNode("/");
 			_urlsToProcessQueue.Add(rootNode);
+			_urlsVisited.TryAdd(rootNode.Url, true);
 
 			var tasks = new List<Task>();
 			for (int i = 0; i < numberOfThreads; i++)
@@ -74,8 +75,6 @@ namespace WebCrawler.Crawler
 
 		private async Task ScrapeUrl(string rootDomain, PageNode currentNode, BlockingCollection<PageNode> urlsToProcessQueue, ConcurrentDictionary<string, bool> urlsVisited)
 		{
-			urlsVisited.TryAdd(currentNode.Url, true);
-
 			Console.WriteLine("Scraping: " + currentNode.Url);
 			var childUrls = await _urlScraper.ScrapeUrls(rootDomain, currentNode.Url);
 
@@ -85,8 +84,10 @@ namespace WebCrawler.Crawler
 				{
 					var childNode = new PageNode(childUrl);
 					currentNode.AddChild(childNode);
-					urlsToProcessQueue.Add(childNode);
-					urlsVisited.TryAdd(childUrl, true);
+					if (urlsVisited.TryAdd(childUrl, true))
+					{
+						urlsToProcessQueue.Add(childNode);
+					}
 				}
 			}
 		}

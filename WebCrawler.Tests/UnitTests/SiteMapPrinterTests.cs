@@ -5,7 +5,9 @@ using Xunit;
 
 namespace WebCrawler.Tests.UnitTests
 {
-    public class SiteMapPrinterTests
+	using System.Text;
+
+	public class SiteMapPrinterTests
     {
 		[Fact]
 	    public void ShouldBeAbleToPrintVisualSiteMap()
@@ -24,13 +26,14 @@ namespace WebCrawler.Tests.UnitTests
 
 			var siteMap = printer.Format(root);
 
-		    string _expectedSiteMap = @"/
-  /about/   
-  /blog/
-    /blog/one/
-      /blog/one/b/";
+		    var expectedSiteMap = new StringBuilder();
+		    expectedSiteMap.AppendLine("/");
+		    expectedSiteMap.AppendLine("  /about/");
+		    expectedSiteMap.AppendLine("  /blog/");
+		    expectedSiteMap.AppendLine("    /blog/one/");
+		    expectedSiteMap.AppendLine("      /blog/one/b/");
 
-			siteMap.ShouldBe(_expectedSiteMap);
+			siteMap.ShouldBe(expectedSiteMap.ToString());
 		}
 
     }
