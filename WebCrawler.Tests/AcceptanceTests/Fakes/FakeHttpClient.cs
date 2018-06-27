@@ -9,17 +9,16 @@ namespace WebCrawler.Tests.AcceptanceTests.Fakes
 
 	public class FakeHttpClient : IHttpClientWrapper
 	{
-		private const string SeedUrl = "monzo.com";
+		private const string Domain = "https://monzo.com";
 
 		readonly Dictionary<string, string> _pages = new Dictionary<string, string>()
 		{
-			{ SeedUrl+ "/", "home.html"},
-			{ SeedUrl+ "/about", "about.html"}
+			{ Domain+ "/", "home.html"},
+			{ Domain+ "/about", "about.html"}
 		};
 
 		public async Task<string> Get(string url)
 		{
-			Thread.Sleep(100);
 			if (_pages.TryGetValue(url, out string filename))
 			{
 				return await File.ReadAllTextAsync($"AcceptanceTests/Fakes/TestData/{filename}");

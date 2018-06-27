@@ -9,13 +9,14 @@
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<HttpClientWrapper>().As<IHttpClientWrapper>().SingleInstance();
-			builder.RegisterType<UrlScraper>().SingleInstance();
-			builder.RegisterType<Crawler>().SingleInstance();
-			builder.RegisterType<UrlExtractor>().SingleInstance();
-			builder.RegisterType<UrlFilter>().SingleInstance();
-			builder.RegisterType<SiteMapPrinter>().SingleInstance();
-			builder.RegisterType<CrawlingOrchestrator>().SingleInstance();
+			builder.RegisterType<HttpClientWrapper>().As<IHttpClientWrapper>();
+			builder.RegisterType<CrawlingOrchestrator>();
+			builder.RegisterType<Crawler>();
+			builder.RegisterType<UrlScraper>();
+			builder.RegisterType<UrlSanitiser>();
+			builder.RegisterType<UrlExtractor>();
+			builder.RegisterType<UrlFilter>();
+			builder.RegisterType<SiteMapPrinter>();
 		}
 	}
 }

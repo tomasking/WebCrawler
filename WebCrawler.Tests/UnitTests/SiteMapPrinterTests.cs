@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Shouldly;
+﻿using Shouldly;
 using WebCrawler.Crawler;
 using WebCrawler.Crawler.Model;
 using Xunit;
@@ -10,7 +7,6 @@ namespace WebCrawler.Tests.UnitTests
 {
     public class SiteMapPrinterTests
     {
-
 		[Fact]
 	    public void ShouldBeAbleToPrintVisualSiteMap()
 	    {

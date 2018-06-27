@@ -5,11 +5,11 @@ using Xunit;
 
 namespace WebCrawler.Tests.UnitTests.UrlScraping
 {
-	public class UrlFilterTests
+	public class FiltersAndSanitisesTests
     {
 	    private readonly UrlFilter _urlFilter;
 
-	    public UrlFilterTests()
+	    public FiltersAndSanitisesTests()
 	    {
 		    _urlFilter = new UrlFilter(new UrlSanitiser());
 	    }

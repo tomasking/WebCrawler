@@ -13,8 +13,18 @@ namespace WebCrawler
     {
 	    static void Main()
 	    {
-		    RunAsync().GetAwaiter().GetResult();
-	    }
+		    try
+		    {
+			    RunAsync().GetAwaiter().GetResult();
+		    }
+		    catch (Exception e)
+		    {
+				Console.WriteLine($"Fatal Error: {e}"); //TODO: proper logging
+		    }
+
+		    Console.WriteLine("Press any key to exit"); 
+		    Console.ReadKey();
+		}
 
 	    static async Task RunAsync()
 	    {
@@ -28,16 +38,13 @@ namespace WebCrawler
 			    sw.Start();
 
 				var siteMap = await crawler.Crawl("monzo.com", numberOfThreads: 4);
-			    sw.Stop();
 
+			    sw.Stop();
 				Console.WriteLine(siteMap);
 			    Console.WriteLine($"Time taken {sw.Elapsed.TotalSeconds} seconds");
 
 				await File.WriteAllTextAsync("./monzo_sitemap.txt", siteMap, Encoding.UTF8);
 		    }
-
-		    Console.WriteLine("Press any key to exit");
-		    Console.ReadKey();
 		}
 		
 	    private static IContainer BuildIoC()

@@ -16,11 +16,11 @@ namespace WebCrawler.Tests.AcceptanceTests
 	    private readonly CrawlingOrchestrator _crawlingOrchestrator;
 	    private string _seedUrl = "monzo.com";
 	    string _expectedSiteMap =
-		    @"/
+			@"/
   /about
-    /blog/2018/06/21/how-to-get-online-in-an-emergency/
-    /blog/2018/06/19/gambling-block-self-exclusion/
-    /blog/2018/06/14/what-is-open-banking/
+    /blog/2018/06/21/how-to-get-online-in-an-emergency
+    /blog/2018/06/19/gambling-block-self-exclusion
+    /blog/2018/06/14/what-is-open-banking
   /blog
   /community
   /faq

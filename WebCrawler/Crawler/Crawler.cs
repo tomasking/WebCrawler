@@ -41,7 +41,7 @@ namespace WebCrawler.Crawler
 			return rootNode;
 		}
 
-		public async Task SpawnWorker(int workerNumber, string rootDomain)
+		public async Task SpawnWorker(int threadNumber, string rootDomain)
 		{
 			await Task.Run(async () =>
 			{
@@ -52,11 +52,11 @@ namespace WebCrawler.Crawler
 						break;
 					}
 
-					_doingWork[workerNumber] = true;
+					_doingWork[threadNumber] = true;
 
 					await ScrapeUrl(rootDomain, currentNode, _urlsToProcessQueue, _urlsVisited);
 
-					_doingWork[workerNumber] = false;
+					_doingWork[threadNumber] = false;
 
 					if (CrawlingCompleted())
 					{
