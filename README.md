@@ -2,9 +2,9 @@
 
 ### Some assumptions / quirks
 
-- Crawler very specific to Monzo domain eg filtering done on hardcoded urls.
+- Crawler very specific to companies domain eg filtering done on hardcoded urls.
 - I've got no logging frameworks, just writing to console for now
-- www.monzo.com same as monzo.com
+- www.somecompany.com same as somecompany.com
 - I'm assuming the page has rendered already, any links dynamically created won't currently be crawled
 - I've got no retry logic on the HTTP call, any failures will just return an empty page (and write error to console)
 - Basic exception handling - if anywhere throws an error apart from the HTTP call, the whole crawl will terminate
